@@ -23,6 +23,14 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin d
 # Optional: Install QEMU Guest Agent for Proxmox integration
 sudo apt install -y qemu-guest-agent
 sudo systemctl enable --now qemu-guest-agent
+
+# Create the directory
+sudo mkdir -p /opt/semaphore
+sudo chown $USER:$USER /opt/semaphore
+cd /opt/semaphore
+
+# Clone the repository
+git clone git@github.com:sdrwtf-labs/semaphore-deployment.git .
 ```
 
 ## Setup
