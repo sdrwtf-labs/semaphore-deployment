@@ -1,34 +1,28 @@
 # Ansible Semaphore Infrastructure
 
-This container hosts the Ansible Semaphore UI for automated system administration.
+This repository hosts the Ansible Semaphore UI and associated services for automated system administration, running on a dedicated Debian VM.
 
 ## Prerequisites & Installation
-This setup assumes a fresh Debian 12 (Bookworm) LXC container. Run the following commands to prepare the environment:
+This setup assumes a fresh Debian 13 (Trixie) VM. Run the following commands to prepare the environment:
 
 ```bash
+# Update system
 sudo apt update && sudo apt upgrade -y
-```
-```bash
-sudo apt install -y ca-certificates curl gnupg
-```
 
-```bash
+# Install Docker Engine and Compose
+sudo apt install -y ca-certificates curl gnupg
 sudo install -m 0755 -d /etc/apt/keyrings
-```
-```bash
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-```
-```bash
+curl -fsSL [https://download.docker.com/linux/debian/gpg](https://download.docker.com/linux/debian/gpg) | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
-```
-```bash
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-```
-```bash
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] [https://download.docker.com/linux/debian](https://download.docker.com/linux/debian) $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
 sudo apt update
-```
-```bash
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Optional: Install QEMU Guest Agent for Proxmox integration
+sudo apt install -y qemu-guest-agent
+sudo systemctl enable --now qemu-guest-agent
 ```
 
 ## Setup
