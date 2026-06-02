@@ -1,0 +1,39 @@
+services:
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: ${DB_USER:-semaphore}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME:-semaphore}
+    volumes:
+      - semaphore-postgres:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  semaphore:
+    image: semaphoreui/semaphore:latest
+    ports:
+      - "${HOST_PORT:-80}:3000"
+    environment:
+      SEMAPHORE_DB_DIALECT: postgres
+      SEMAPHORE_DB_HOST: postgres
+      SEMAPHORE_DB_PORT: ${DB_PORT:-5432}
+      SEMAPHORE_DB: ${DB_NAME:-semaphore}
+      SEMAPHORE_DB_USER: ${DB_USER:-semaphore}
+      SEMAPHORE_DB_PASS: ${DB_PASS}
+      SEMAPHORE_ADMIN_PASSWORD: ${ADMIN_PASS}
+      SEMAPHORE_ADMIN_NAME: ${ADMIN_NAME}
+      SEMAPHORE_ADMIN_EMAIL: ${ADMIN_EMAIL}
+      SEMAPHORE_ADMIN: ${ADMIN_USER}
+
+      # SMTP Configuration
+      SEMAPHORE_EMAIL_HOST: ${SMTP_HOST}
+      SEMAPHORE_EMAIL_PORT: ${SMTP_PORT}
+      SEMAPHORE_EMAIL_SENDER: ${SMTP_SENDER}
+      SEMAPHORE_EMAIL_USERNAME: ${SMTP_USER:-}
+      SEMAPHORE_EMAIL_PASSWORD: ${SMTP_PASS:-}
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+volumes:
+  semaphore-postgres:
