@@ -10,7 +10,7 @@ This setup assumes a fresh Debian 13 (Trixie) VM. Run the following commands to 
 sudo apt update && sudo apt upgrade -y
 
 # Install Docker Engine and Compose
-sudo apt install -y ca-certificates curl gnupg
+sudo apt install -y ca-certificates curl gnupg git
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL [https://download.docker.com/linux/debian/gpg](https://download.docker.com/linux/debian/gpg) | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
