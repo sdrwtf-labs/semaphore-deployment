@@ -20,6 +20,8 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
 sudo apt update
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
+sudo usermod -aG docker $USER
+
 # Optional: Install QEMU Guest Agent for Proxmox integration
 sudo apt install -y qemu-guest-agent
 sudo systemctl enable --now qemu-guest-agent
