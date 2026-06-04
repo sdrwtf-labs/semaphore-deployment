@@ -17,11 +17,14 @@ cd /opt/semaphore
 git clone git@github.com:sdrwtf-labs/semaphore-deployment.git .
 ```
 
-2. Create a .env file in this directory with the following variables:
+2. Generate 
+
+3. Create a .env file in this directory with the following variables:
 
 ```text
 ## Host configuration
 HOST_PORT=80
+LOCAL_DNS=replace_with_local_dns
 
 ## Database credentials
 DB_USER=semaphore
@@ -34,6 +37,9 @@ ADMIN_PASS=replace_with_a_secure_admin_password
 ADMIN_NAME=Admin
 ADMIN_USER=admin
 ADMIN_EMAIL=admin@your-domain.local
+
+## Semaphore Encryption Key
+SEMAPHORE_ACCESS_KEY_ENCRYPTION=replace_with_generated_base64_key
 
 ## SMTP Configuration
 SMTP_HOST=smtp.example.com
