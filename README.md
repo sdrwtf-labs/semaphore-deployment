@@ -42,12 +42,35 @@ ADMIN_EMAIL=admin@your-domain.local
 SEMAPHORE_ACCESS_KEY_ENCRYPTION=replace_with_generated_base64_key
 
 ## SMTP Configuration
+SMTP_EMAIL_ALERT=false
+SMTP_SECURE=true
 SMTP_HOST=smtp.example.com
 SMTP_PORT=587
 SMTP_SENDER=notifications@example.com
 # Comment out if user/password not needed
 SMTP_USER=your_username
 SMTP_PASS=your_smtp_password
+
+## Telegram Bot Notifications
+TELEGRAM_ALERT=false
+TELEGRAM_TOKEN=replace_with_api_token
+TELEGRAM_CHAT_ID=replace_with_chat_id
+```
+
+*Note: If there are configuration issues, the config.json file in the container can be edited as follows:*
+
+```bash
+# Enter the container
+docker compose exec -it -u root semaphore sh
+
+# Add nano
+apk add nano
+
+# Edit the config.json manually
+nano /etc/semaphore/config.json
+
+# Restart the container after exiting it with `exit`
+docker compose down && docker compose up -d
 ```
 
 3. Start the services:

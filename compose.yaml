@@ -36,6 +36,11 @@ services:
       SEMAPHORE_EMAIL_SENDER: ${SMTP_SENDER}
       SEMAPHORE_EMAIL_USERNAME: ${SMTP_USER:-}
       SEMAPHORE_EMAIL_PASSWORD: ${SMTP_PASS:-}
+
+      # Telegram Configuration
+      SEMAPHORE_TELEGRAM_ALERT: "${TELEGRAM_ALERT:-false}"
+      SEMAPHORE_TELEGRAM_TOKEN: "${TELEGRAM_TOKEN:-}"
+      SEMAPHORE_TELEGRAM_CHAT: "${TELEGRAM_CHAT_ID:-}"
     depends_on:
       - postgres
     restart: unless-stopped
